@@ -16,4 +16,10 @@ public class FirstApi {
 	public String greet(@PathVariable String name) {
 		return "Hello, " + name + " ! Welcome to my API.";
 	}
+	//Day3
+	@GetMapping("/add")
+	public String add(@RequestParam int a, @RequestParam int b) {
+		int result = a + b;
+		return  "The Sum is " + result;
+	}
 }
