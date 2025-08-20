@@ -22,4 +22,10 @@ public class FirstApi {
 		int result = a + b;
 		return  "The Sum is " + result;
 	}
+	
+	//Day 4
+	@GetMapping("/person1")
+	public Person1 getPerson1() {
+		return new Person1("Nik", 22);
+	}
 }
