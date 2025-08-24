@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,5 +23,15 @@ public class MyFirstController {
 	public List<Person1> getPersons(){
 		return persons;
 	}
-	
+	// Day 7
+	//Get person by id (Get with pathVariable
+	@GetMapping("/person/{id}")
+	public Person1 getPersonById(@PathVariable int id) {
+		for(Person1 p : persons) {
+			if (p.getId() == id) {
+				return p;
+			}
+		}
+		return null; //if not found
+	}
 }
