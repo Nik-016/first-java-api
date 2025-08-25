@@ -3,6 +3,7 @@ package com.example.demo;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.*;
@@ -34,4 +35,17 @@ public class MyFirstController {
 		}
 		return null; //if not found
 	}
+	
+	//day 8
+	@PutMapping("/updatePerson/{id}")
+	public String updatePerson(@PathVariable int id,@RequestBody Person1 updatePerson) {
+		for (int i = 0; i < persons.size(); i++) {
+			if (persons.get(i).getId() == id) {
+				persons.set(i, updatePerson); //replace old person with new person
+				return "Person updated Successfully!";
+			}
+		}
+		return "Person not found";
+	}
+	
 }
