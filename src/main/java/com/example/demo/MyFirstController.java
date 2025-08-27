@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,6 +47,18 @@ public class MyFirstController {
 			}
 		}
 		return "Person not found";
+	}
+	
+	//day 9
+	@DeleteMapping("/deletePerson/{id}")
+	public String deletePerson(@PathVariable int id) {
+		for (int i = 0; i< persons.size(); i++) {
+			if (persons.get(i).getId() == id) {
+				persons.remove(i); //remove person from list
+				return "Person deleted Successfully!";
+			}
+		}
+		return "Person not found.";
 	}
 	
 }
