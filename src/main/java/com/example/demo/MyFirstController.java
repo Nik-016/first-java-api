@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,12 +16,13 @@ public class MyFirstController {
 	private List<Person1> persons = new ArrayList<>();
 	
 	//Post request add a person
+	/*
 	@PostMapping("/addPerson1")
 	public String addPerson(@RequestBody Person1 person) {
 		persons.add(person); //add to the list
 		return "Person added Successfully!";
 	}
-	
+	*/
 	//Get request: fetch all persons
 	@GetMapping("/getPerson")
 	public List<Person1> getPersons(){
@@ -61,4 +64,11 @@ public class MyFirstController {
 		return "Person not found.";
 	}
 	
+	@PostMapping("/addPerson1")
+	public ResponseEntity<String> addPerson(@RequestBody Person1 newPerson){
+		persons.add(newPerson);
+		return new ResponseEntity<>("Person added successfully!",HttpStatus.CREATED);
+	}
 }
+
+
