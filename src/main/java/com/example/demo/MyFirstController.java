@@ -33,7 +33,7 @@ public class MyFirstController {
 	//Get person by id (Get with pathVariable
 	@GetMapping("/person/{id}")
 	public Person1 getPersonById(@PathVariable int id) {
-		for(Person1 p : persons) {
+		for(Person1 p : persons) { // object p in variable persons
 			if (p.getId() == id) {
 				return p;
 			}
@@ -95,7 +95,7 @@ public class MyFirstController {
 	}
 	
 	//put:update a person (id in URL MUST match id in body)
-	
+	@PutMapping("/update/{id}")
 	public ResponseEntity<String> updatePerson(@PathVariable int id, @RequestBody Person1 updatePerson){
 		//Guard : path id and id must match (prevents accidental wrong updates)
 		if (updatePerson.getId() != id) {
