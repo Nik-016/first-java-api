@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -44,13 +46,38 @@ public class StudentController {
 		for (Student s : students) {
 			if (s.getGrade() == grade) {
 				result.add(s);
-				
 			}
 		}
 		if (result.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<>(result,HttpStatus.OK);
+		}
+		@PutMapping("/studentupdate/{id}")
+		public ResponseEntity<String> updateStudent(@RequestBody Student updateStudent, @PathVariable int id){
+			if (updateStudent.getId() != id){
+				return new ResponseEntity<>("Path id and Body id must match", HttpStatus.BAD_REQUEST);
+			}
+			for (int i = 0; i <= students.size(); i++) {
+				if (students.get(i).getId() == id) {
+					students.set(i,updateStudent);
+					return new ResponseEntity<>("Student Update Successfully", HttpStatus.OK);
+				}
+				}
+				return new ResponseEntity<>("Student not found", HttpStatus.NO_CONTENT);
+		}
+		@DeleteMapping("/studentDelete/{id}")
+		public ResponseEntity<String> deleteStudent(@RequestBody Student deleteStudent,@PathVariable int id){
+			if(deleteStudent.getId() != id) {
+				return new ResponseEntity<>("Student not found", HttpStatus.BAD_REQUEST);
+			}
+			for (int i = 0; i <= students.size();i++) {
+				if (students.get(i).getId() == id){
+					students.set(i, deleteStudent);
+					return new ResponseEntity<>("Student deleted Successfully", HttpStatus.OK);
+				}
+			}
+			return new ResponseEntity<>("Student not found", HttpStatus.NO_CONTENT);
 		}
 	}
 
